@@ -54,8 +54,8 @@ body {
 }
 
 .weather-side:hover {
-  -webkit-transform: scale(1.1) perspective(1500px) rotateY(10deg);
-  transform: scale(1.1) perspective(1500px) rotateY(10deg);
+  -webkit-transform: scale(1.1) perspective(1500px);
+  transform: scale(1.1) perspective(1500px);
 }
 
 .weather-gradient {
@@ -259,4 +259,13 @@ input {
   height: 1em;
   width: auto;
   margin-right: 0px;
+}
+.open-source {
+  font-size: 10px;
+  padding-left: 75%;
+  float: inline-end;
+}
+.github-link {
+  text-decoration: underline;
+  color: #8989ff;
 }
