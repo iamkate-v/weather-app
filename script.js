@@ -67,18 +67,23 @@ function search(city) {
 }
 
 function weatherResponse(response) {
+  console.log(response.data);
   let currentW = Math.round(response.data.main.temp);
   let replaceCity = document.querySelector("#two");
   replaceCity.innerHTML = response.data.name;
   let replaceTemp = document.querySelector("#main");
   replaceTemp.innerHTML = `${currentW}°`;
-
+  let iconElement = document.querySelector("#icon");
   document.querySelector("#humidity").innerHTML =
     response.data.main.humidity + " %";
   document.querySelector("#wind").innerHTML =
     Math.round(response.data.wind.speed) + " km/h";
   document.querySelector("#sunny").innerHTML =
     response.data.weather[0].description;
+  iconElement.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
 }
 function clickButton(event) {
   event.preventDefault();

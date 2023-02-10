@@ -87,7 +87,7 @@ body {
   display: inline-block;
 
   margin-top: 10px;
-  font-size: 25px;
+  font-size: 35px;
 }
 
 .location-icon {
@@ -103,9 +103,8 @@ body {
   left: 25px;
 }
 
-.weather-icon.feather {
-  height: 60px;
-  width: auto;
+.weather-icon {
+  margin: -30px -20px;
 }
 
 .weather-temp {
@@ -123,6 +122,9 @@ a {
 }
 .weather-desc {
   margin: 0;
+}
+.weather-desc::first-letter {
+  text-transform: capitalize;
 }
 
 .info-side {
@@ -262,7 +264,7 @@ input {
 }
 .open-source {
   font-size: 10px;
-  padding-left: 75%;
+  padding-left: 74%;
   float: inline-end;
 }
 .github-link {
