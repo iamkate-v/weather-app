@@ -42,21 +42,11 @@ function changeCity(event) {
 let form = document.querySelector("#four");
 form.addEventListener("click", changeCity);
 
-function changeTempC(event) {
-  event.preventDefault();
-  let mainTemp = document.querySelector("#main");
-  mainTemp.innerHTML = Math.round((29 * 9) / 5 + 32) + "°";
-}
-let celsiuss = document.querySelector("#farengeit");
-celsiuss.addEventListener("click", changeTempC);
-
 function changeTempF(event) {
   event.preventDefault();
   let mainTemp = document.querySelector("#main");
   mainTemp.innerHTML = `${29}°`;
 }
-let celsiusss = document.querySelector("#celsius");
-celsiusss.addEventListener("click", changeTempF);
 
 // week 5 challange
 function search(city) {
@@ -72,7 +62,7 @@ function weatherResponse(response) {
   let replaceCity = document.querySelector("#two");
   replaceCity.innerHTML = response.data.name;
   let replaceTemp = document.querySelector("#main");
-  replaceTemp.innerHTML = `${currentW}°`;
+  replaceTemp.innerHTML = `${currentW}`;
   let iconElement = document.querySelector("#icon");
   document.querySelector("#humidity").innerHTML =
     response.data.main.humidity + " %";
@@ -84,6 +74,7 @@ function weatherResponse(response) {
     "src",
     `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
+  celsiusTransform = response.data.main.temp;
 }
 function clickButton(event) {
   event.preventDefault();
@@ -108,7 +99,33 @@ function geo(event) {
   navigator.geolocation.getCurrentPosition(handlePosition);
 }
 
+function displayFahrenheitTemperature(event) {
+  event.preventDefault();
+  let temperatureElement = document.querySelector("#main");
+
+  celsiusLink.classList.remove("active");
+  fahrenheitLink.classList.add("active");
+  let fahrenheiTemperature = (celsiusTransform * 9) / 5 + 32;
+  temperatureElement.innerHTML = Math.round(fahrenheiTemperature);
+}
+
+function displayCelsiusTemperature(event) {
+  event.preventDefault();
+  celsiusLink.classList.add("active");
+  fahrenheitLink.classList.remove("active");
+  let temperatureElement = document.querySelector("#main");
+  temperatureElement.innerHTML = Math.round(celsiusTransform);
+}
+
+let celsiusTransform = null;
+
 let myLocation = document.querySelector("#five");
 myLocation.addEventListener("click", geo);
+
+let fahrenheitLink = document.querySelector("#fahrenheit-link");
+fahrenheitLink.addEventListener("click", displayFahrenheitTemperature);
+
+let celsiusLink = document.querySelector("#celsius-link");
+celsiusLink.addEventListener("click", displayCelsiusTemperature);
 
 search("Kyiv");
