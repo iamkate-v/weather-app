@@ -118,6 +118,9 @@ body {
   color: white;
   font-weight: 100;
 }
+.cel-far > a {
+  text-decoration: none;
+}
 .active {
   cursor: default;
   text-decoration: none;
