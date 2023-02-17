@@ -229,6 +229,9 @@ input {
   font-size: 12px;
   padding: 7px;
 }
+.type-city {
+  max-width: 56%;
+}
 .location-button,
 .current-location {
   outline: none;
@@ -237,7 +240,7 @@ input {
   box-sizing: border-box;
   border: none;
   border-radius: 25px;
-  padding: 10px;
+  padding: 9px;
   font-family: "Montserrat", sans-serif;
   background-image: var(--gradient);
   color: #ffffff;

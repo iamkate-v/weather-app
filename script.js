@@ -55,15 +55,51 @@ function search(city) {
 
   axios.get(`${apiUrl}&appid=${apiKey}`).then(weatherResponse);
 }
+function displayForecast(response) {
+  console.log(response.data.daily[0]);
+  let forecastOne = document.querySelector("#temp-day-one");
+  let forecastTwo = document.querySelector("#temp-day-two");
+  let forecastThree = document.querySelector("#temp-day-three");
+  let forecastFour = document.querySelector("#temp-day-four");
+  let iconOne = document.querySelector("#icon-one");
+  let iconTwo = document.querySelector("#icon-two");
+  let iconThree = document.querySelector("#icon-three");
+  let iconFour = document.querySelector("#icon-four");
+  forecastOne.innerHTML = Math.round(response.data.daily[0].temp.day) + "°C";
+  forecastTwo.innerHTML = Math.round(response.data.daily[1].temp.day) + "°C";
+  forecastThree.innerHTML = Math.round(response.data.daily[2].temp.day) + "°C";
+  forecastFour.innerHTML = Math.round(response.data.daily[3].temp.day) + "°C";
+  iconOne.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${response.data.daily[0].weather[0].icon}@2x.png`
+  );
+  iconTwo.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${response.data.daily[1].weather[0].icon}@2x.png`
+  );
+  iconThree.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${response.data.daily[2].weather[0].icon}@2x.png`
+  );
+  iconFour.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${response.data.daily[3].weather[0].icon}@2x.png`
+  );
+}
+function getForecast(coord) {
+  let apiKey = "96ad27349a64ea1dcdfbe6f4d458c085";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coord.lat}&lon=${coord.lon}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayForecast);
+}
 
 function weatherResponse(response) {
-  console.log(response.data);
   let currentW = Math.round(response.data.main.temp);
   let replaceCity = document.querySelector("#two");
-  replaceCity.innerHTML = response.data.name;
   let replaceTemp = document.querySelector("#main");
-  replaceTemp.innerHTML = `${currentW}`;
   let iconElement = document.querySelector("#icon");
+  replaceCity.innerHTML = response.data.name;
+  replaceTemp.innerHTML = `${currentW}`;
+
   document.querySelector("#humidity").innerHTML =
     response.data.main.humidity + " %";
   document.querySelector("#wind").innerHTML =
@@ -75,6 +111,7 @@ function weatherResponse(response) {
     `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
   celsiusTransform = response.data.main.temp;
+  getForecast(response.data.coord);
 }
 function clickButton(event) {
   event.preventDefault();
