@@ -99,7 +99,8 @@ function weatherResponse(response) {
   let iconElement = document.querySelector("#icon");
   replaceCity.innerHTML = response.data.name;
   replaceTemp.innerHTML = `${currentW}`;
-
+  document.querySelector("#main-weather").innerHTML =
+    response.data.weather[0].main;
   document.querySelector("#humidity").innerHTML =
     response.data.main.humidity + " %";
   document.querySelector("#wind").innerHTML =
